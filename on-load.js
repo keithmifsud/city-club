@@ -17,7 +17,7 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0w
  * Script runs on page load.
  */
 
-console.log('loaded from GH!!!')
+console.log('loaded from GH pages and updated at least once.')
 
 let tierChangedToStudentOrStaff = false
 let requiresActivation = false
