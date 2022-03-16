@@ -20,7 +20,6 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0w
 console.log('activation testing that popups does not reload - 2')
 
 let tierChangedToStudentOrStaff = false
-let requiresActivation = Cookies.get('activation')
 
 let graphApi = graphql(`${API_URL}`, {
   asJSON: true,
@@ -138,8 +137,9 @@ async function setCookiesFromUrl () {
       Cookies.set('venueId', urlParams.get('venue_id'), { expires: 365 })
     }
     if (urlParams.has('activation') && (urlParams.get('activation') === 'true' || urlParams.get('activation') === true)) {
-      Cookies.set('activation', true, { expires: 365 })
-      requiresActivation = true
+      if (!Cookies.get('activation')) {
+        Cookies.set('activation', true, { expires: 365 })
+      }
     } else {
       Cookies.set('activation', false, { expires: 365 })
     }
@@ -161,7 +161,7 @@ async function retrieveAndSetGuestMembership () {
           if (tierChangedToStudentOrStaff) {
             triggerWebHook(ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL, true)
           }
-          if (requiresActivation) {
+          if (Cookies.get('activation') === true) {
             triggerWebHook(ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL, false)
           }
           resolve()
