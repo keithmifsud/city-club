@@ -17,7 +17,7 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0w
  * Script runs on page load.
  */
 
-console.log('activation testing that popups does not reload - 2')
+console.log('activation testing that popups does not reload - 3')
 
 let tierChangedToStudentOrStaff = false
 
@@ -39,9 +39,6 @@ let graphApi = graphql(`${API_URL}`, {
 
 init()
 
-document.getElementById('close-activated-modal').addEventListener('click', function () {
-  Cookies.set('activation', false, { expires: 365 })
-})
 
 // Internal methods
 
@@ -76,7 +73,7 @@ async function initDesign () {
   // If the value matches takes Header background and tier text elements and changes their color.
   // The elements with the tier names as IDs are stars next to the tier name. They are all hidden, but if the tier matches then it displays the star with the appropriate color. So if the colors are changed, a new star has to be uploaded with that color.
 
-  if (requiresActivation) {
+  if (Cookies.get('activation') === true) {
     showActivationModal()
   }
 
@@ -339,6 +336,9 @@ function hideLoader () {
 
 function showActivationModal () {
   document.getElementById('activated-outer').style.display = 'block'
+  document.getElementById('close-activated-modal').addEventListener('click', function () {
+    Cookies.set('activation', false, { expires: 365 })
+  })
 }
 
 // ---- end of snippet ---
