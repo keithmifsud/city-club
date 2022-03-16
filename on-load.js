@@ -17,7 +17,7 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0w
  * Script runs on page load.
  */
 
-console.log('loaded from GH pages and updated at least once.')
+console.log('activation test')
 
 let tierChangedToStudentOrStaff = false
 let requiresActivation = false
@@ -134,7 +134,7 @@ async function setCookiesFromUrl () {
     if (urlParams.has('venue_id')) {
       Cookies.set('venueId', urlParams.get('venue_id'), { expires: 365 })
     }
-    if (urlParams.has('activation') && urlParams.get('activation') === 'true' || urlParams.get('activation') === true) {
+    if (urlParams.has('activation') && (urlParams.get('activation') === 'true' || urlParams.get('activation') === true)) {
       Cookies.set('activation', true, { expires: 365 })
       requiresActivation = true
     } else {
