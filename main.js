@@ -1,3 +1,5 @@
-require('./src/on-load')
+import { onLoad } from './src/on-load'
 
 console.log('main-js')
+
+onLoad()
