@@ -18,61 +18,6 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0w
 
 /** ./Configuration **/
 
-/** Initialization **/
-
-async function initMicroSite () {
-  return await new Promise((resolve, reject) => {
-    showLoader()
-    initialiseState().then(() => {
-      if (!isReferred()) {
-        hideLoader()
-        resolve()
-        window.location.href = LOGIN_URL
-      } else {
-        getMember().then(member => {
-          setMemberState(member).then(() => {
-            triggerWebHook(
-              ZAPIER_ON_LOAD_WEB_HOOK_URL,
-              true
-            ).then(() => {
-              if (tierChangedToStudentOrStaff()) {
-                triggerWebHook(
-                  ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL,
-                  true
-                ).then(() => {
-                  resolve()
-                })
-              } else{
-                resolve()
-              }
-            }).then(() => {
-              if (requiresActivation()) {
-                triggerWebHook(
-                  ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL,
-                  false
-                ).then(() => {
-                  hideLoader()
-                  showActivationModal()
-                })
-              }
-            })
-          }).then(() => {
-            hideLoader()
-            resolve()
-          })
-        })
-      }
-      // ....
-    }).catch(errors => {
-      reject(errors)
-    })
-  })
-}
-
-initMicroSite()
-
-/** ./Initialization **/
-
 /** State **/
 
 const state = {
@@ -129,7 +74,7 @@ async function initialiseState () {
     if (urlParams.has('venue_id')) {
       setState('venueId', urlParams.get('venue_id'))
     }
-    if (urlParams.has('activation')) {
+    if (urlParams.has('activation')) {https://city-club-members.webflow.io/?tiers-and-venues=regular
       setState('activation', true)
     }
 
@@ -159,6 +104,61 @@ async function setMemberState(member) {
 
 
 /** State **/
+
+/** Initialization **/
+
+async function initMicroSite () {
+  return await new Promise((resolve, reject) => {
+    showLoader()
+    initialiseState().then(() => {
+      if (!isReferred()) {
+        hideLoader()
+        resolve()
+        window.location.href = LOGIN_URL
+      } else {
+        getMember().then(member => {
+          setMemberState(member).then(() => {
+            triggerWebHook(
+              ZAPIER_ON_LOAD_WEB_HOOK_URL,
+              true
+            ).then(() => {
+              if (tierChangedToStudentOrStaff()) {
+                triggerWebHook(
+                  ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL,
+                  true
+                ).then(() => {
+                  resolve()
+                })
+              } else{
+                resolve()
+              }
+            }).then(() => {
+              if (requiresActivation()) {
+                triggerWebHook(
+                  ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL,
+                  false
+                ).then(() => {
+                  hideLoader()
+                  showActivationModal()
+                })
+              }
+            })
+          }).then(() => {
+            hideLoader()
+            resolve()
+          })
+        })
+      }
+      // ....
+    }).catch(errors => {
+      reject(errors)
+    })
+  })
+}
+
+initMicroSite()
+
+/** ./Initialization **/
 
 /** API client **/
 
