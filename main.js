@@ -175,6 +175,8 @@ initMicroSite().then(() => {
   renderDesign()
 })
 
+listenToBannersCtaClick()
+
 // listen to clicks on c-bannerfw-cta buttons
 
 // retrieve the webhook url if any
@@ -299,6 +301,14 @@ function capitalizeFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 }
 
+function listenToBannersCtaClick() {
+  const ctas = document.querySelectorAll('.c-bannerfw-cta')
+  ctas.forEach(cta => {
+    cta.addEventListener('click', function () {
+      console.log('clicked CTA:', cta)
+    })
+  })
+}
 
 /** ./Internal methods **/
 
