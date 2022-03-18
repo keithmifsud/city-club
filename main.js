@@ -306,6 +306,7 @@ function listenToBannersCtaClick() {
   ctas.forEach(cta => {
     cta.addEventListener('click', function handleClick() {
       console.log('clicked CTA:', cta)
+      alert('clicked CTA:' + cta)
     })
   })
 }
