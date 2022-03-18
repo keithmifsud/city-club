@@ -1,7 +1,3 @@
-export function onLoad() {
-  console.log('on-load method')
-}
-
 
 // Config
 const LOGIN_URL = 'https://www.mryum.com/cpc-testing-ho/dine-in'
