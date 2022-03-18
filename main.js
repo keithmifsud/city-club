@@ -24,7 +24,7 @@ const state = {
   guestId: null,
   venueId: null,
   activation: false,
-  visitType: false,
+  visitType: null,
   clubPoints: null,
   tier: null,
   name: null,
@@ -63,6 +63,10 @@ function tierChangedToStudentOrStaff() {
 
 function requiresActivation() {
   return getState('activation')
+}
+
+function isFirstVisit() {
+  return getState('visitType') === 'FIRST'
 }
 
 async function initialiseState () {
