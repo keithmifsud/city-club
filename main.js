@@ -8,9 +8,9 @@ const LOGIN_URL = 'https://www.mryum.com/cpc-testing-ho/dine-in'
 
 const ZAPIER_ON_LOAD_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bsm6fk7/'
 
-const ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL = null
+const ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bszxf8j/'
 
-const ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL = null
+const ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bszxjw2/'
 
 const API_URL = 'https://eu1-stable-api.mryum.com/graphql'
 
@@ -174,6 +174,12 @@ async function initMicroSite () {
 initMicroSite().then(() => {
   renderDesign()
 })
+
+// listen to clicks on c-bannerfw-cta buttons
+
+// retrieve the webhook url if any
+
+// trigger webhook (all visits)
 
 /** ./Initialization **/
 
