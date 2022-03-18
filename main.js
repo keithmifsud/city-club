@@ -16,6 +16,16 @@ const API_URL = 'https://eu1-stable-api.mryum.com/graphql'
 
 const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0wNzk1LTRjMGUtYWRhMy0wZjVjYzA1YTBmNjYiLCJzdWIiOiIxMDM5ODRjZi0wZmM2LTQwMTMtYWMxMC03MmViMDdkZDM0YjYiLCJpYXQiOjE2NDY4NjMyMzEsImlzcyI6Imh0dHBzOi8vZXUxLXByb2R1Y3Rpb24tc3RhYmxlLWFwaS5tcnl1bS5jb20iLCJhdWQiOiJodHRwczovL2V1MS1wcm9kdWN0aW9uLXN0YWJsZS1hcGkubXJ5dW0uY29tIiwiZXhwIjoxNjc4Mzk5MjMxfQ.MDTXIszIVWhmbPmplmoRQ6Mv8gMBxk34KRt3vKFfZl0'
 
+const TIERS = [
+  'GUEST',
+  'LOCAL',
+  'REGULAR',
+  'FRIEND',
+  'FAMILY',
+  'NHS',
+  'STUDENT'
+]
+
 /** ./Configuration **/
 
 /** State **/
@@ -113,6 +123,7 @@ async function setMemberState(member) {
 
 async function initMicroSite () {
   return await new Promise((resolve, reject) => {
+    hideAllTierStars()
     showLoader()
     initialiseState().then(() => {
       if (!isReferred()) {
@@ -160,7 +171,9 @@ async function initMicroSite () {
   })
 }
 
-initMicroSite()
+initMicroSite().then(() => {
+  renderDesign()
+})
 
 /** ./Initialization **/
 
@@ -276,6 +289,10 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
   })
 }
 
+function capitalizeFirstLetter(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+}
+
 
 /** ./Internal methods **/
 
@@ -283,6 +300,75 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
 
 function renderDesign () {
 
+  styleHeader()
+  fillContent()
+  const tier = getState('tier')
+  if (tier === 'NHS') {
+    document.getElementById('keyworker-outer').style.display = 'block'
+  }
+  if ( tier === 'STUDENT') {
+    document.getElementById('student-outer').style.display = 'block'
+  }
+}
+
+function fillContent() {
+  let points = getState('clubPoints')
+  if (points === null){
+    points = 0
+  }
+  const pointsContent = document.getElementById('points')
+  pointsContent.innerText = points.toLocaleString()
+
+  const tierContent = document.getElementById('tier')
+  tierContent.innerText = capitalizeFirstLetter(getState('tier'))
+}
+
+function styleHeader() {
+  hideAllTierStars()
+  const tier = getState('tier')
+  let headerBackgroundColour = '#bee6b7'
+  let tierColour = '#CDECC8'
+  switch (tier) {
+    case 'LOCAL':
+      headerBackgroundColour = '#d6f2ea'
+      tierColour = '#AEE5D7'
+      break
+    case 'REGULAR':
+      headerBackgroundColour = '#fadad8'
+      tierColour = '#F1A4A0'
+      break
+    case 'FRIEND':
+      headerBackgroundColour = '#fbe89d'
+      tierColour = '#F6D13B'
+      break
+    case 'FAMILY':
+      headerBackgroundColour = '#cbe2cc'
+      tierColour = '#A5D0AD'
+      break
+    default:
+      headerBackgroundColour = '#bee6b7'
+      tierColour = '#CDECC8'
+  }
+
+  document.getElementById('header-bg').style.backgroundColor = headerBackgroundColour
+  document.getElementById('tier').style.color = tierColour
+  showTierStar(tier)
+}
+
+function hideAllTierStars() {
+  TIERS.forEach(tier => {
+    let star = document.getElementById(tier.toLowerCase())
+    if (star !== null) {
+      star.style.display = 'none'
+    }
+  })
+}
+
+function showTierStar(tier) {
+  let star = document.getElementById(tier.toLowerCase())
+  if (star !== null) {
+    star.style.display = 'block'
+  }
 }
 
 /**
