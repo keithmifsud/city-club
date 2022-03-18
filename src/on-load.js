@@ -17,7 +17,7 @@ const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0w
  * Script runs on page load.
  */
 
-console.log('activation testing that popups does not reload - 3')
+console.log('loaded on load!')
 
 let tierChangedToStudentOrStaff = false
 
