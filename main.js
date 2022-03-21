@@ -315,8 +315,8 @@ function listenToBannersCtaClick() {
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
       if (bannerCtaWebhook.length > 0) {
-        console.log('The URL is:', bannerCtaWebhook)
-        triggerWebHook(bannerCtaWebhook)
+        //console.log('The URL is:', bannerCtaWebhook)
+        triggerWebHook(decodeURIComponent(bannerCtaWebhook))
       }
     })
   })
