@@ -312,8 +312,11 @@ function listenToBannersCtaClick() {
   const ctas = document.querySelectorAll('.c-bannerfw-cta')
   ctas.forEach(cta => {
     cta.addEventListener('click', function handleClick(event) {
-      console.log('clicked CTA:', event)
-      alert('clicked CTA:' + event)
+      const bannerCta = event.currentTarget.attributes.href.nodeValue
+      const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
+      if (bannerCtaWebhook.length > 0) {
+        triggerWebHook(bannerCtaWebhook)
+      }
     })
   })
 }
