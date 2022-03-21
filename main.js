@@ -171,10 +171,6 @@ async function initMicroSite () {
   })
 }
 
-initMicroSite().then(() => {
-  renderDesign()
-})
-
 // listen to clicks on c-bannerfw-cta buttons
 
 // retrieve the webhook url if any
