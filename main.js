@@ -175,14 +175,6 @@ initMicroSite().then(() => {
   renderDesign()
 })
 
-listenToBannersCtaClick()
-
-// listen to clicks on c-bannerfw-cta buttons
-
-// retrieve the webhook url if any
-
-// trigger webhook (all visits)
-
 /** ./Initialization **/
 
 /** API client **/
@@ -202,7 +194,10 @@ let graphApi = graphql(`${API_URL}`, {
         mobile,
         points,
         tier
-      }`
+      }`,
+ /*   guestMembershipPayload: `on GuestMembershipPayload {
+      guestMembershipPayload
+    }`*/
   }
 })
 
@@ -221,6 +216,12 @@ async function getMember () {
     })
   })
 }
+
+/*async function deductMembershipPoints (input) {
+  const deductPoints = graphApi.mutate(`removeGuestMembershipPoints(input: input) {
+    
+  }`)
+}*/
 
 /** ./API client **/
 
@@ -299,16 +300,6 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
 
 function capitalizeFirstLetter(word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-}
-
-function listenToBannersCtaClick() {
-  const ctas = document.querySelectorAll('.c-bannerfw-cta')
-  ctas.forEach(cta => {
-    cta.addEventListener('click', function handleClick(event) {
-      console.log('clicked CTA:', event)
-      alert('clicked CTA:' + event)
-    })
-  })
 }
 
 /** ./Internal methods **/
