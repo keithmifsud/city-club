@@ -285,7 +285,7 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
         resolve()
       } else {
         axios.create(
-          {
+          {our
             transformRequest: [(data, _headers) => JSON.stringify(data)]
           }
         ).post(
@@ -315,6 +315,7 @@ function listenToBannersCtaClick() {
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
       if (bannerCtaWebhook.length > 0) {
+        console.log('The URL is:', bannerCtaWebhook)
         triggerWebHook(bannerCtaWebhook)
       }
     })
