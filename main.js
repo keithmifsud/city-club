@@ -285,7 +285,7 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
         resolve()
       } else {
         axios.create(
-          {our
+          {
             transformRequest: [(data, _headers) => JSON.stringify(data)]
           }
         ).post(
