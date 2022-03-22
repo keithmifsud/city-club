@@ -88,7 +88,7 @@ async function initialiseState () {
     if (urlParams.has('venue_id')) {
       setState('venueId', urlParams.get('venue_id'))
     }
-    if (urlParams.has('activation')) {https://city-club-members.webflow.io/?tiers-and-venues=regular
+    if (urlParams.has('activation')) {
       setState('activation', true)
     }
 
@@ -198,7 +198,9 @@ let graphApi = graphql(`${API_URL}`, {
         tier
       }`,
     guestMembershipPayload: `on GuestMembershipPayload {
-      guestMembershipPayload
+      guestMembershipPayload {
+        ...member
+      }
     }`
   }
 })
@@ -308,6 +310,7 @@ function listenToBannersCtaClick() {
   const ctas = document.querySelectorAll('.c-button-l')
   ctas.forEach(cta => {
     cta.addEventListener('click', function handleClick(event) {
+      event.preventDefault()
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
       if (bannerCtaWebhook.length > 0) {
