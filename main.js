@@ -304,6 +304,9 @@ function capitalizeFirstLetter (word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 }
 
+/**
+ * Listens to the CTA buttons' click.
+ */
 function listenToBannersCtaClick () {
   const ctas = document.querySelectorAll('.c-button-l')
   ctas.forEach(cta => {
