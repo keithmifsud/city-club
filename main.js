@@ -306,14 +306,11 @@ function capitalizeFirstLetter (word) {
 
 /**
  * Listens to the CTA buttons' click.
- * 
  */
 function listenToBannersCtaClick () {
   const ctas = document.querySelectorAll('.c-button-l')
   ctas.forEach(cta => {
-    console.log('CTA:', cta)
     cta.addEventListener('click', function handleClick (event) {
-      console.log('cta event:', event)
       event.preventDefault()
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
