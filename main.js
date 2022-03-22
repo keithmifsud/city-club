@@ -306,6 +306,7 @@ function capitalizeFirstLetter (word) {
 
 /**
  * Listens to the CTA buttons' click.
+ * 
  */
 function listenToBannersCtaClick () {
   const ctas = document.querySelectorAll('.c-button-l')
