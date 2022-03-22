@@ -67,15 +67,15 @@ function isReferred () {
   return getState('guestId') !== null
 }
 
-function tierChangedToStudentOrStaff() {
+function tierChangedToStudentOrStaff () {
   return getState('tierChangedToStudentOrStaff')
 }
 
-function requiresActivation() {
+function requiresActivation () {
   return getState('activation')
 }
 
-function isFirstVisit() {
+function isFirstVisit () {
   return getState('visitType') === 'FIRST'
 }
 
@@ -103,8 +103,7 @@ async function initialiseState () {
   })
 }
 
-
-async function setMemberState(member) {
+async function setMemberState (member) {
   return await new Promise(resolve => {
     setState('clubPoints', member.points)
     setState('tier', resolveTier(member))
@@ -115,7 +114,6 @@ async function setMemberState(member) {
     resolve()
   })
 }
-
 
 /** State **/
 
@@ -144,7 +142,7 @@ async function initMicroSite () {
                 ).then(() => {
                   resolve()
                 })
-              } else{
+              } else {
                 resolve()
               }
             }).then(() => {
@@ -237,14 +235,14 @@ async function deductMembershipPoints (input) {
  * @param member
  * @return {*|null}
  */
-function resolveTier(member) {
+function resolveTier (member) {
   const emailAddress = member.email.toLowerCase()
   let tier = member.tier
 
   if (!tier) {
     if (emailAddress.includes('.nhs.uk')) {
       tier = 'NHS'
-       setState('tierChangedToStudentOrStaff', true, false)
+      setState('tierChangedToStudentOrStaff', true, false)
     } else if (emailAddress.includes('.ac.uk')) {
       tier = 'STUDENT'
       setState('tierChangedToStudentOrStaff', true, false)
@@ -302,14 +300,16 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
   })
 }
 
-function capitalizeFirstLetter(word) {
+function capitalizeFirstLetter (word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 }
 
-function listenToBannersCtaClick() {
+function listenToBannersCtaClick () {
   const ctas = document.querySelectorAll('.c-button-l')
   ctas.forEach(cta => {
-    cta.addEventListener('click', function handleClick(event) {
+    console.log('CTA:', cta)
+    cta.addEventListener('click', function handleClick (event) {
+      console.log('cta event:', event)
       event.preventDefault()
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
@@ -333,14 +333,14 @@ function renderDesign () {
   if (tier === 'NHS') {
     document.getElementById('keyworker-outer').style.display = 'block'
   }
-  if ( tier === 'STUDENT') {
+  if (tier === 'STUDENT') {
     document.getElementById('student-outer').style.display = 'block'
   }
 }
 
-function fillContent() {
+function fillContent () {
   let points = getState('clubPoints')
-  if (points === null){
+  if (points === null) {
     points = 0
   }
   const pointsContent = document.getElementById('points')
@@ -350,7 +350,7 @@ function fillContent() {
   tierContent.innerText = capitalizeFirstLetter(getState('tier'))
 }
 
-function styleHeader() {
+function styleHeader () {
   hideAllTierStars()
   const tier = getState('tier')
   let headerBackgroundColour = '#bee6b7'
@@ -382,7 +382,7 @@ function styleHeader() {
   showTierStar(tier)
 }
 
-function hideAllTierStars() {
+function hideAllTierStars () {
   TIERS.forEach(tier => {
     let star = document.getElementById(tier.toLowerCase())
     if (star !== null) {
@@ -391,7 +391,7 @@ function hideAllTierStars() {
   })
 }
 
-function showTierStar(tier) {
+function showTierStar (tier) {
   let star = document.getElementById(tier.toLowerCase())
   if (star !== null) {
     star.style.display = 'block'
