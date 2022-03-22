@@ -305,7 +305,7 @@ function capitalizeFirstLetter(word) {
 }
 
 function listenToBannersCtaClick() {
-  const ctas = document.querySelectorAll('.c-bannerfw-cta')
+  const ctas = document.querySelectorAll('.c-button-l')
   ctas.forEach(cta => {
     cta.addEventListener('click', function handleClick(event) {
       const bannerCta = event.currentTarget.attributes.href.nodeValue
