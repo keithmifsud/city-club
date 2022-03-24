@@ -117,6 +117,9 @@ async function setMemberState (member) {
 
 async function setStateFromCookies() {
   return await new Promise(resolve => {
+    setState('guestId', Cookies.get('guestId'))
+    setState('venueId', Cookies.get('venueId'))
+    setState('visitType', Cookies.get('visitType'))
     setState('clubPoints', Cookies.get('clubPoints'))
     setState('tier', Cookies.get('tier'))
     setState('name', Cookies.get('name'))
