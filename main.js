@@ -232,11 +232,6 @@ async function initMicroSite () {
   })
 }
 
-// listen to clicks on c-bannerfw-cta buttons
-
-// retrieve the webhook url if any
-
-// trigger webhook (all visits)
 
 /** ./Initialization **/
 
@@ -414,10 +409,10 @@ function renderDesign () {
   styleHeader()
   fillContent()
   const tier = getState('tier')
-  if (tier === 'NHS') {
+  if (tier === 'NHS' && getState('tierChangedToStudentOrStaff') === true) {
     document.getElementById('keyworker-outer').style.display = 'block'
   }
-  if (tier === 'STUDENT') {
+  if (tier === 'STUDENT' && getState('tierChangedToStudentOrStaff') === true) {
     document.getElementById('student-outer').style.display = 'block'
   }
 }
