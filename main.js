@@ -249,14 +249,16 @@ async function getMember () {
 
 async function deductMembershipPoints (promotionName) {
   const deductPoints = graphApi(`mutation (@autodeclare) {
-    removeGuestMembershipPoints($guestId, $points, $reason) { ...member }
+    removeGuestMembershipPoints(input: $input) { ...member }
   }`)
 
   return await new Promise((resolve, reject) => {
     deductPoints({
-      guestId: getState('guestId'),
-      points: getState('clubPoints'),
-      reason: promotionName
+      input: {
+        guestId: getState('guestId'),
+        points: getState('clubPoints'),
+        reason: promotionName
+      }
     }).then(response => {
       resolve(response)
     }).catch(errors => {
