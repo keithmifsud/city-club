@@ -222,12 +222,12 @@ let graphApi = graphql(`${API_URL}`, {
         mobile,
         points,
         tier
-      }`
-/*    guestMembershipPayload: `on GuestMembershipPayload {
+      }`,
+    /*guestMembershipPayload: `on GuestMembershipPayload {
       guestMembershipPayload {
         ...member
       }
-    }*/`
+    }`*/
   }
 })
 
