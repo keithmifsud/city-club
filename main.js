@@ -329,7 +329,7 @@ async function deductPoints (points, promoName) {
     ).post(
       ZAPIER_DEDUCT_POINTS_WEBHOOK_URL,
       {
-        guestId: getState('guestId'),
+        guestId: Cookies.get('guestId'),
         pointsToDeduct: points,
         promoName: promoName,
       },
