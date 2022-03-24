@@ -480,6 +480,9 @@ function showTierStar (tier) {
   let star = document.getElementById(tier.toLowerCase())
   if (star !== null) {
     star.style.display = 'block'
+  } else if (tier === 'NHS' || tier === 'STUDENT') {
+    star = document.getElementById('guest')
+    star.style.display = 'block'
   }
 }
 
