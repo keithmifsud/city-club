@@ -115,6 +115,18 @@ async function setMemberState (member) {
   })
 }
 
+async function setStateFromCookies() {
+  return await new Promise(resolve => {
+    setState('clubPoints', Cookies.get('clubPoints'))
+    setState('tier', Cookies.get('tier'))
+    setState('name', Cookies.get('name'))
+    setState('email', Cookies.get('email'))
+    setState('mobile', Cookies.get('mobile'))
+    setState('limitParticipation', Cookies.get('limit_participation'))
+    resolve()
+  })
+}
+
 /** State **/
 
 /** Initialization **/
