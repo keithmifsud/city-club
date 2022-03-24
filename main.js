@@ -153,13 +153,14 @@ async function initMicroSite () {
               true
             ).then(() => {
 
-              let memberClubPoints = getState('clubPoints')
+              const memberClubPoints = getState('clubPoints')
               if (memberClubPoints !== null) {
-                memberClubPoints = parseInt(memberClubPoints)
-                triggerWebHook(
-                  ZAPIER_2000_POINTS_WEBHOOK_URL,
-                  false
-                )
+                if (parseInt(memberClubPoints) >= 2000) {
+                  triggerWebHook(
+                    ZAPIER_2000_POINTS_WEBHOOK_URL,
+                    false
+                  )
+                }
               }
 
               if (tierChangedToStudentOrStaff()) {
