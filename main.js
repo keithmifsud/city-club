@@ -248,12 +248,12 @@ async function getMember () {
 }
 
 async function deductMembershipPoints (promotionName) {
-  const deductPoints = graphApi(` mutation (@autodeclare) {
-    removeGuestMembershipPoints({
+  const deductPoints = graphApi(`mutation (@autodeclare) {
+    removeGuestMembershipPoints(
       $guestId,
       $points,
-      $reason,
-    }) {...member}
+      $reason
+    ) { ...member }
   }`)
 
   return await new Promise((resolve, reject) => {
