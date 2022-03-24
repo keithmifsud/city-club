@@ -330,8 +330,8 @@ async function deductPoints (points, promoName) {
       ZAPIER_DEDUCT_POINTS_WEBHOOK_URL,
       {
         guestId: getState('guestId'),
-        pointsToDeduct: 0,
-        promoName: '',
+        pointsToDeduct: points,
+        promoName: promoName,
       },
       { headers: { 'Accept': 'application/json' } }
     ).then(() => {
@@ -359,8 +359,8 @@ function listenToBannersCtaClick () {
       if (bannerCtaWebhook.length > 0) {
         triggerWebHook(decodeURIComponent(bannerCtaWebhook)).then(() => {
           deductPoints(
-            Cookies.get('promoName'),
-            Cookies.get('promoPoints')
+            Cookies.get('promoPoints'),
+            Cookies.get('promoName')
           )
         })
       }
