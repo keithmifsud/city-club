@@ -368,7 +368,11 @@ async function deductPoints (points, promoName) {
       },
       { headers: { 'Accept': 'application/json' } }
     ).then(() => {
-      resolve()
+      getMember().then(member => {
+        setMemberState(member).then(() => {
+          resolve()
+        })
+      })
     }).catch(() => {
       reject()
     })
