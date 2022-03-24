@@ -12,6 +12,8 @@ const ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL = 'https://hooks.zap
 
 const ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bszxjw2/'
 
+const ZAPIER_2000_POINTS_WEBHOOK_URL = 'https://zapier.com/app/history/001a6425-1b0b-af69-9917-990ff722b7d1'
+
 const API_URL = 'https://eu1-stable-api.mryum.com/graphql'
 
 const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0wNzk1LTRjMGUtYWRhMy0wZjVjYzA1YTBmNjYiLCJzdWIiOiIxMDM5ODRjZi0wZmM2LTQwMTMtYWMxMC03MmViMDdkZDM0YjYiLCJpYXQiOjE2NDY4NjMyMzEsImlzcyI6Imh0dHBzOi8vZXUxLXByb2R1Y3Rpb24tc3RhYmxlLWFwaS5tcnl1bS5jb20iLCJhdWQiOiJodHRwczovL2V1MS1wcm9kdWN0aW9uLXN0YWJsZS1hcGkubXJ5dW0uY29tIiwiZXhwIjoxNjc4Mzk5MjMxfQ.MDTXIszIVWhmbPmplmoRQ6Mv8gMBxk34KRt3vKFfZl0'
@@ -115,7 +117,7 @@ async function setMemberState (member) {
   })
 }
 
-async function setStateFromCookies() {
+async function setStateFromCookies () {
   return await new Promise(resolve => {
     setState('guestId', Cookies.get('guestId'))
     setState('venueId', Cookies.get('venueId'))
@@ -150,6 +152,16 @@ async function initMicroSite () {
               ZAPIER_ON_LOAD_WEB_HOOK_URL,
               true
             ).then(() => {
+
+              let memberClubPoints = getState('clubPoints')
+              if (memberClubPoints !== null) {
+                memberClubPoints = parseInt(memberClubPoints)
+                triggerWebHook(
+                  ZAPIER_2000_POINTS_WEBHOOK_URL,
+                  false
+                )
+              }
+
               if (tierChangedToStudentOrStaff()) {
                 triggerWebHook(
                   ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL,
