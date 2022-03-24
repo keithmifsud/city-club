@@ -247,10 +247,27 @@ async function getMember () {
   })
 }
 
-async function deductMembershipPoints (input) {
-  const deductPoints = graphApi.mutate(`removeGuestMembershipPoints(input: input) {
-    
+async function deductMembershipPoints (promotionName) {
+  const deductPoints = graphApi(` mutation (@autodeclare) {
+    removeGuestMembershipPoints({
+      $guestId,
+      $points,
+      $reason,
+    }) {...member}
   }`)
+
+  return await new Promise((resolve, reject) => {
+    deductPoints({
+      guestId: getState('guestId'),
+      points: getState('clubPoints'),
+      reason: promotionName
+    }).then(response => {
+      resolve(response)
+    }).catch(errors => {
+      reject(errors)
+    })
+  })
+
 }
 
 /** ./API client **/
@@ -343,8 +360,9 @@ function listenToBannersCtaClick () {
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
       if (bannerCtaWebhook.length > 0) {
-        //console.log('The URL is:', bannerCtaWebhook)
-        triggerWebHook(decodeURIComponent(bannerCtaWebhook))
+        triggerWebHook(decodeURIComponent(bannerCtaWebhook)).then(() => {
+          deductMembershipPoints('Test reason')
+        })
       }
     })
   })
