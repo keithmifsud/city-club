@@ -52,6 +52,39 @@ const getAllState = (asString = false) => {
   if (asString) {
     return JSON.stringify(state)
   }
+
+  if (getState('guestId') === null) {
+    setState('guestId', Cookies.get('guestId'))
+  }
+
+  if (getState('venueId') === null) {
+    setState('venueId', Cookies.get('venueId'))
+  }
+
+  if (getState('visitType') === null) {
+    setState('visitType', Cookies.get('visitType'))
+  }
+
+  if (getState('clubPoints') === null) {
+    setState('clubPoints', Cookies.get('clubPoints'))
+  }
+
+  if (getState('tier') === null) {
+    setState('tier', Cookies.get('tier'))
+  }
+
+  if (getState('name') === null) {
+    setState('name', Cookies.get('name'))
+  }
+
+  if (getState('email') === null) {
+    setState('email', Cookies.get('email'))
+  }
+
+  if (getState('mobile') === null) {
+    setState('mobile', Cookies.get('mobile'))
+  }
+
   return state
 }
 
