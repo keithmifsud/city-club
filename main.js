@@ -222,12 +222,12 @@ let graphApi = graphql(`${API_URL}`, {
         mobile,
         points,
         tier
-      }`,
-    guestMembershipPayload: `on GuestMembershipPayload {
+      }`
+/*    guestMembershipPayload: `on GuestMembershipPayload {
       guestMembershipPayload {
         ...member
       }
-    }`
+    }*/`
   }
 })
 
@@ -249,11 +249,7 @@ async function getMember () {
 
 async function deductMembershipPoints (promotionName) {
   const deductPoints = graphApi(`mutation (@autodeclare) {
-    removeGuestMembershipPoints(
-      $guestId,
-      $points,
-      $reason
-    ) { ...member }
+    removeGuestMembershipPoints($guestId, $points, $reason) { ...member }
   }`)
 
   return await new Promise((resolve, reject) => {
