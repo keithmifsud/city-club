@@ -14,6 +14,8 @@ const ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/
 
 const ZAPIER_2000_POINTS_WEBHOOK_URL = 'https://zapier.com/app/history/001a6425-1b0b-af69-9917-990ff722b7d1'
 
+const ZAPIER_DEDUCT_POINTS_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bsnmsqi/'
+
 const API_URL = 'https://eu1-stable-api.mryum.com/graphql'
 
 const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0wNzk1LTRjMGUtYWRhMy0wZjVjYzA1YTBmNjYiLCJzdWIiOiIxMDM5ODRjZi0wZmM2LTQwMTMtYWMxMC03MmViMDdkZDM0YjYiLCJpYXQiOjE2NDY4NjMyMzEsImlzcyI6Imh0dHBzOi8vZXUxLXByb2R1Y3Rpb24tc3RhYmxlLWFwaS5tcnl1bS5jb20iLCJhdWQiOiJodHRwczovL2V1MS1wcm9kdWN0aW9uLXN0YWJsZS1hcGkubXJ5dW0uY29tIiwiZXhwIjoxNjc4Mzk5MjMxfQ.MDTXIszIVWhmbPmplmoRQ6Mv8gMBxk34KRt3vKFfZl0'
@@ -242,7 +244,6 @@ async function getMember () {
   })
 }
 
-
 /** ./API client **/
 
 /** Internal methods **/
@@ -318,6 +319,29 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
   })
 }
 
+async function deductPoints (points, promoName) {
+  return await new Promise((resolve, reject) => {
+
+    axios.create(
+      {
+        transformRequest: [(data, _headers) => JSON.stringify(data)]
+      }
+    ).post(
+      ZAPIER_DEDUCT_POINTS_WEBHOOK_URL,
+      {
+        guestId: getState('guestId'),
+        pointsToDeduct: 0,
+        promoName: '',
+      },
+      { headers: { 'Accept': 'application/json' } }
+    ).then(() => {
+      resolve()
+    }).catch(() => {
+      reject()
+    })
+  })
+}
+
 function capitalizeFirstLetter (word) {
   return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
 }
@@ -333,9 +357,7 @@ function listenToBannersCtaClick () {
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
       if (bannerCtaWebhook.length > 0) {
-        triggerWebHook(decodeURIComponent(bannerCtaWebhook)).then(() => {
-          deductMembershipPoints('Test reason')
-        })
+        triggerWebHook(decodeURIComponent(bannerCtaWebhook))
       }
     })
   })
