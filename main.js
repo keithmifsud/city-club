@@ -223,11 +223,6 @@ let graphApi = graphql(`${API_URL}`, {
         points,
         tier
       }`,
-    /*guestMembershipPayload: `on GuestMembershipPayload {
-      guestMembershipPayload {
-        ...member
-      }
-    }`*/
   }
 })
 
@@ -247,26 +242,6 @@ async function getMember () {
   })
 }
 
-async function deductMembershipPoints (promotionName) {
-  const deductPoints = graphApi(`mutation (@autodeclare) {
-    removeGuestMembershipPoints(input: $input) { ...member }
-  }`)
-
-  return await new Promise((resolve, reject) => {
-    deductPoints({
-      input: {
-        guestId: getState('guestId'),
-        points: getState('clubPoints'),
-        reason: promotionName
-      }
-    }).then(response => {
-      resolve(response)
-    }).catch(errors => {
-      reject(errors)
-    })
-  })
-
-}
 
 /** ./API client **/
 
