@@ -357,7 +357,14 @@ function listenToBannersCtaClick () {
       const bannerCta = event.currentTarget.attributes.href.nodeValue
       const bannerCtaWebhook = bannerCta.substring(bannerCta.indexOf('=') + 1)
       if (bannerCtaWebhook.length > 0) {
-        triggerWebHook(decodeURIComponent(bannerCtaWebhook))
+        triggerWebHook(decodeURIComponent(bannerCtaWebhook)).then(() => {
+          const promoNameContainer = document.getElementById('promo-name')
+          const promoPointsContainer = document.getElementById('promo-points')
+          deductPoints(
+            promoNameContainer.innerText,
+            promoPointsContainer.innerText
+          )
+        })
       }
     })
   })
