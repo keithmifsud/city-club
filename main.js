@@ -426,7 +426,13 @@ function fillContent () {
   pointsContent.innerText = points.toLocaleString()
 
   const tierContent = document.getElementById('tier')
-  tierContent.innerText = capitalizeFirstLetter(getState('tier'))
+
+  let tier = getState('tier')
+
+  if (tier !== 'NHS') {
+    tier = capitalizeFirstLetter(tier)
+  }
+  tierContent.innerText = tier
 }
 
 function styleHeader () {
