@@ -235,7 +235,7 @@ async function initMicroSite () {
                 resolve()
               }
             }).then(() => {
-              if (requiresActivation()) {
+              if (requiresActivation() && !getState('tierChangedToStudentOrStaff')) {
                 triggerWebHook(
                   ZAPIER_REQUIRES_ACTIVATION_WEB_HOOK_URL,
                   false
@@ -329,9 +329,9 @@ function resolveTier (member) {
         tier = 'GUEST'
       } else if (points > 999 && points < 2500) {
         tier = 'LOCAL'
-      } else if (points > 2500 && points < 5000) {
+      } else if (points >= 2500 && points < 5000) {
         tier = 'REGULAR'
-      } else if (points > 5000 && points < 10000) {
+      } else if (points >= 5000 && points < 10000) {
         tier = 'FRIEND'
       } else if (points > 9999) {
         tier = 'FAMILY'
@@ -343,9 +343,9 @@ function resolveTier (member) {
       tier = 'GUEST'
     } else if (points > 999 && points < 2500) {
       tier = 'LOCAL'
-    } else if (points > 2500 && points < 5000) {
+    } else if (points >= 2500 && points < 5000) {
       tier = 'REGULAR'
-    } else if (points > 5000 && points < 10000) {
+    } else if (points >= 5000 && points < 10000) {
       tier = 'FRIEND'
     } else if (points > 9999) {
       tier = 'FAMILY'
