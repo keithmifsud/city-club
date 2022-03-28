@@ -110,7 +110,7 @@ function isReferred () {
 }
 
 function shouldHideStartOrderingButton() {
-  return getState('venueId') === null ||
+  return getState('venueId') === undefined ||
     getState('venueName') === 'cpc-testing-ho'
 }
 
