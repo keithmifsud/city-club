@@ -117,12 +117,9 @@ function shouldHideStartOrderingButton () {
 
   if (getState('venueId') === undefined ||
     getState('venueId') === undefined ||
-    getState('venueId') === null
+    getState('venueId') === null ||
+    getState('venueName') === 'cpc-testing-ho'
   ) {
-    hide = true
-  }
-
-  if (hide === false && getState('venueName') === 'cpc-testing-ho') {
     hide = true
   }
 
