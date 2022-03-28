@@ -314,6 +314,8 @@ function resolveTier (member) {
   const emailAddress = member.email.toLowerCase()
   let tier = member.tier
 
+  console.log('The member from API:', member)
+
   if (!tier) {
     if (emailAddress.includes('.nhs.uk')) {
       tier = 'NHS'
