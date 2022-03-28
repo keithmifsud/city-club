@@ -115,10 +115,10 @@ function shouldHideStartOrderingButton () {
     getState('venueId') === undefined ||
     getState('venueId') === null
 
-  let invalidVenusName = getState('venueId') === null ||
+  let invalidVenueName = getState('venueName') === null ||
     getState('venueName') === 'cpc-testing-ho'
-  
-  return invalidVenueId || invalidVenusName
+
+  return invalidVenueId || invalidVenueName
 }
 
 function tierChangedToStudentOrStaff () {
