@@ -110,6 +110,9 @@ function isReferred () {
 }
 
 function shouldHideStartOrderingButton () {
+
+  console.log('venueId', getState('venueId'))
+  console.log('venueName', getState('venueName'))
   let hide = false
 
   if (getState('venueId') === undefined ||
