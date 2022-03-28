@@ -352,7 +352,7 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
         ).post(
           webhookUrl,
           getAllState(),
-          { headers: { 'Accept': 'application/json' } }
+          //{ headers: { 'Accept': 'application/json' } }
         ).then(() => {
           resolve()
         }).catch(() => {
