@@ -122,8 +122,6 @@ function shouldHideStartOrderingButton () {
 
   hide =  invalidVenueId && invalidVenueName
 
-  console.log('hide? VN: ', invalidVenueName + 'VID: ', invalidVenueId)
-
   return hide
 }
 
@@ -326,6 +324,8 @@ function resolveTier (member) {
     }
   }
 
+  console.log('after special check:', tier)
+
   if (tier !== 'STUDENT' && tier !== 'NHS' && tier !== 'STAFF') {
     const points = member.points
     if (points > -1 && points < 1000) {
@@ -340,6 +340,8 @@ function resolveTier (member) {
       tier = 'FAMILY'
     }
   }
+
+  console.log('after resolve points check:', tier)
 
   return tier
 }
