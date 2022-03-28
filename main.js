@@ -109,9 +109,21 @@ function isReferred () {
   return getState('guestId') !== null
 }
 
-function shouldHideStartOrderingButton() {
-  return getState('venueId') === undefined ||
-    getState('venueName') === 'cpc-testing-ho'
+function shouldHideStartOrderingButton () {
+  let hide = false
+
+  if (getState('venueId') === undefined ||
+    getState('venueId') === undefined ||
+    getState('venueId') === null
+  ) {
+    hide = true
+  }
+
+  if (hide === false && getState('venueName') === 'cpc-testing-ho') {
+    hide = true
+  }
+
+  return hide
 }
 
 function tierChangedToStudentOrStaff () {
@@ -136,7 +148,7 @@ async function initialiseState () {
       setState('venueId', urlParams.get('venue_id'))
     }
 
-    if(urlParams.has('return_uri')) {
+    if (urlParams.has('return_uri')) {
       setState('venueName', decodeURIComponent(urlParams.get('return_uri')))
     }
 
@@ -249,7 +261,6 @@ async function initMicroSite () {
     })
   })
 }
-
 
 /** ./Initialization **/
 
