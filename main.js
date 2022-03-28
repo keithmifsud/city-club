@@ -111,14 +111,7 @@ function isReferred () {
 
 function shouldHideStartOrderingButton () {
 
-  let invalidVenueId = getState('venueId') === undefined ||
-    getState('venueId') === undefined ||
-    getState('venueId') === null
-
-  let invalidVenueName = getState('venueName') === null ||
-    getState('venueName') === 'cpc-testing-ho'
-
-  return invalidVenueId || invalidVenueName
+  return false
 }
 
 function tierChangedToStudentOrStaff () {
