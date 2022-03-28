@@ -46,6 +46,7 @@ const state = {
   mobile: null,
   limitParticipation: false,
   tierChangedToStudentOrStaff: false,
+  venueName: null,
 }
 
 const getAllState = (asString = false) => {
@@ -59,6 +60,10 @@ const getAllState = (asString = false) => {
 
   if (getState('venueId') === null) {
     setState('venueId', Cookies.get('venueId'))
+  }
+
+  if (getState('venueName') === null) {
+    setState('venueName', Cookies.get('venueName'))
   }
 
   if (getState('visitType') === null) {
@@ -104,6 +109,11 @@ function isReferred () {
   return getState('guestId') !== null
 }
 
+function shouldHideStartOrderingButton() {
+  return getState('venueId') === null ||
+    getState('venueName') === 'cpc-testing-ho'
+}
+
 function tierChangedToStudentOrStaff () {
   return getState('tierChangedToStudentOrStaff')
 }
@@ -125,6 +135,11 @@ async function initialiseState () {
     if (urlParams.has('venue_id')) {
       setState('venueId', urlParams.get('venue_id'))
     }
+
+    if(urlParams.has('return_uri')) {
+      setState('venueName', decodeURIComponent(urlParams.get('return_uri')))
+    }
+
     if (urlParams.has('activation')) {
       setState('activation', true)
     }
@@ -220,12 +235,15 @@ async function initMicroSite () {
               }
             })
           }).then(() => {
+            if (shouldHideStartOrderingButton()) {
+              document.getElementById('start-ordering-button').style.display = 'none'
+            }
             hideLoader()
             resolve()
           })
         })
       }
-      // ....
+
     }).catch(errors => {
       reject(errors)
     })
