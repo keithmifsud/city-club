@@ -314,8 +314,6 @@ function resolveTier (member) {
   const emailAddress = member.email.toLowerCase()
   let tier = member.tier
 
-  console.log('The member from API:', member)
-
   if (!tier) {
     if (emailAddress.includes('.nhs.uk')) {
       tier = 'NHS'
@@ -324,26 +322,22 @@ function resolveTier (member) {
       tier = 'STUDENT'
       setState('tierChangedToStudentOrStaff', true, false)
     }
-  }
 
-  console.log('after special check:', tier)
-
-  if (tier !== 'STUDENT' && tier !== 'NHS' && tier !== 'STAFF') {
-    const points = member.points
-    if (points > -1 && points < 1000) {
-      tier = 'GUEST'
-    } else if (points > 999 && points < 2500) {
-      tier = 'LOCAL'
-    } else if (points > 2500 && points < 5000) {
-      tier = 'REGULAR'
-    } else if (points > 5000 && points < 10000) {
-      tier = 'FRIEND'
-    } else if (points > 9999) {
-      tier = 'FAMILY'
+    if (tier !== 'STUDENT' && tier !== 'NHS' && tier !== 'STAFF') {
+      const points = member.points
+      if (points > -1 && points < 1000) {
+        tier = 'GUEST'
+      } else if (points > 999 && points < 2500) {
+        tier = 'LOCAL'
+      } else if (points > 2500 && points < 5000) {
+        tier = 'REGULAR'
+      } else if (points > 5000 && points < 10000) {
+        tier = 'FRIEND'
+      } else if (points > 9999) {
+        tier = 'FAMILY'
+      }
     }
   }
-
-  console.log('after resolve points check:', tier)
 
   return tier
 }
