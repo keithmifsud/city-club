@@ -4,7 +4,7 @@
 
 /** Configuration **/
 
-const LOGIN_URL = 'https://www.mryum.com/cpc-testing-ho/dine-in'
+const LOGIN_URL = 'https://www.mryum.com/cpc-testing-ho/membership/loyalty'
 
 const ZAPIER_ON_LOAD_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bsm6fk7/'
 
