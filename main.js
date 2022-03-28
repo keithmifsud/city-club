@@ -111,19 +111,14 @@ function isReferred () {
 
 function shouldHideStartOrderingButton () {
 
-  console.log('venueId', getState('venueId'))
-  console.log('venueName', getState('venueName'))
-  let hide = false
-
-  if (getState('venueId') === undefined ||
+  let invalidVenueId = getState('venueId') === undefined ||
     getState('venueId') === undefined ||
-    getState('venueId') === null ||
-    getState('venueName') === 'cpc-testing-ho'
-  ) {
-    hide = true
-  }
+    getState('venueId') === null
 
-  return hide
+  let invalidVenusName = getState('venueId') === null ||
+    getState('venueName') === 'cpc-testing-ho'
+  
+  return invalidVenueId || invalidVenusName
 }
 
 function tierChangedToStudentOrStaff () {
