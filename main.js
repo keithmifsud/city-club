@@ -47,6 +47,7 @@ const state = {
   limitParticipation: false,
   tierChangedToStudentOrStaff: false,
   venueName: null,
+  totalPointsAccrued: null,
 }
 
 const getAllState = (asString = false) => {
@@ -88,6 +89,10 @@ const getAllState = (asString = false) => {
 
   if (getState('mobile') === null) {
     setState('mobile', Cookies.get('mobile'))
+  }
+
+  if (getState('totalPointsAccrued') === null) {
+    setState('totalPointsAccrued', Cookies.get('totalPointsAccrued'))
   }
 
   return state
@@ -174,6 +179,7 @@ async function setMemberState (member) {
     setState('email', member.email)
     setState('mobile', member.mobile)
     setState('limitParticipation', false)
+    setState('totalPointsAccrued', member.totalPointsAccrued)
     resolve()
   })
 }
@@ -189,6 +195,7 @@ async function setStateFromCookies () {
     setState('email', Cookies.get('email'))
     setState('mobile', Cookies.get('mobile'))
     setState('limitParticipation', Cookies.get('limit_participation'))
+    setState('totalPointsAccrued', Cookies.get('totalPointsAccrued'))
     resolve()
   })
 }
@@ -325,7 +332,7 @@ function resolveTier (member) {
     }
 
     if (tier !== 'STUDENT' && tier !== 'NHS' && tier !== 'STAFF') {
-      const points = member.points
+      const points = member.totalPointsAccrued
       if (points > -1 && points < 1000) {
         tier = 'GUEST'
       } else if (points > 999 && points < 2500) {
@@ -339,7 +346,7 @@ function resolveTier (member) {
       }
     }
   } else if (tier !== 'STUDENT' && tier !== 'NHS' && tier !== 'STAFF') {
-    const points = member.points
+    const points = member.totalPointsAccrued
     if (points > -1 && points < 1000) {
       tier = 'GUEST'
     } else if (points > 999 && points < 2500) {
