@@ -347,15 +347,16 @@ async function triggerWebHook (webhookUrl, sendIfFirstVisitOnly = false) {
       } else {
         axios.create(
           {
-            //transformRequest: [(data, _headers) => JSON.stringify(data)]
+            transformRequest: [(data, _headers) => JSON.stringify(data)]
           }
         ).post(
           webhookUrl,
-          getAllState(true),
-          //{ headers: { 'Accept': 'application/json' } }
+          getAllState(),
+          { headers: { 'Accept': 'application/json' } }
         ).then(() => {
           resolve()
-        }).catch(() => {
+        }).catch(errors => {
+          console.log('caught here:', errors)
           reject()
         })
       }
