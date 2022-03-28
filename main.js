@@ -248,6 +248,7 @@ async function initMicroSite () {
           }).then(() => {
             if (shouldHideStartOrderingButton()) {
               document.getElementById('start-ordering-button').style.display = 'none'
+              document.getElementById('home-back-button').style.display = 'none'
             }
             hideLoader()
             resolve()
