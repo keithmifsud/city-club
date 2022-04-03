@@ -287,7 +287,8 @@ let graphApi = graphql(`${API_URL}`, {
         email,
         mobile,
         points,
-        tier
+        tier,
+        totalPointsAccrued
       }`,
   }
 })
