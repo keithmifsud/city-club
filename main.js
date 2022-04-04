@@ -123,7 +123,7 @@ function shouldHideStartOrderingButton () {
     getState('venueId') === null
 
   let invalidVenueName = getState('venueName') === null ||
-    getState('venueName') === 'cpc-testing-ho'
+    getState('venueName').includes('cpc-testing-ho')
 
   hide =  invalidVenueId && invalidVenueName
 
