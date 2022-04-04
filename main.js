@@ -231,7 +231,7 @@ async function initMicroSite () {
                 }
               }
 
-              if (tierChangedToStudentOrStaff()) {
+              if (tierChangedToStudentOrStaff() && getState('activation') === false) {
                 triggerWebHook(
                   ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL,
                   true
