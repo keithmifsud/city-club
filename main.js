@@ -231,7 +231,7 @@ async function initMicroSite () {
                 }
               }
 
-              if (tierChangedToStudentOrStaff() && getState('activation') === false) {
+              if (tierChangedToStudentOrStaff()) {
                 triggerWebHook(
                   ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL,
                   true
@@ -460,7 +460,7 @@ function renderDesign () {
   if (tier === 'NHS' && getState('tierChangedToStudentOrStaff') === true) {
     document.getElementById('keyworker-outer').style.display = 'block'
   }
-  if (tier === 'STUDENT' && getState('tierChangedToStudentOrStaff') === true) {
+  if (tier === 'STUDENT' && getState('tierChangedToStudentOrStaff') === true && getState('activation') !== true) {
     document.getElementById('student-outer').style.display = 'block'
   }
 }
