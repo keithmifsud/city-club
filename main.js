@@ -234,7 +234,7 @@ async function initMicroSite () {
               if (tierChangedToStudentOrStaff()) {
                 triggerWebHook(
                   ZAPIER_STUDENT_OR_KEY_WORKER_TIER_UPDATE_WEB_HOOK_URL,
-                  false
+                  true
                 ).then(() => {
                   resolve()
                 })
