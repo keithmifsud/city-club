@@ -457,7 +457,7 @@ function renderDesign () {
   styleHeader()
   fillContent()
   const tier = getState('tier')
-  if (tier === 'NHS' && getState('tierChangedToStudentOrStaff') === true) {
+  if (tier === 'NHS' && getState('tierChangedToStudentOrStaff') === true && getState('activation') !== true) {
     document.getElementById('keyworker-outer').style.display = 'block'
   }
   if (tier === 'STUDENT' && getState('tierChangedToStudentOrStaff') === true && getState('activation') !== true) {
