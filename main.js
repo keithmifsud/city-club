@@ -126,7 +126,7 @@ function shouldHideStartOrderingButton () {
 
   let testingVenue = false
 
-  if (getState('venuName') !== null) {
+  if (Cookies.get('venueName') !== null && Cookies.get('venueName') !== undefined) {
     testingVenue = getState('venueName').includes('cpc-testing-ho')
   }
 
