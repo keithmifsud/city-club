@@ -99,14 +99,7 @@ const getAllState = (asString = false) => {
 }
 
 const getState = (propertyName) => {
-
-  let stateToReturn = state[propertyName]
-
-  if (stateToReturn === null) {
-    stateToReturn = Cookies.get(propertyName)
-  }
-
-  return stateToReturn
+  return state[propertyName]
 }
 
 const setState = (propertyName, value, setCookie = true) => {
@@ -133,7 +126,7 @@ function shouldHideStartOrderingButton () {
 
   let testingVenue = false
 
-  if (getState('venueName') !== null) {
+  if (getState('venuName') !== null) {
     testingVenue = getState('venueName').includes('cpc-testing-ho')
   }
 
@@ -142,7 +135,7 @@ function shouldHideStartOrderingButton () {
 
   console.log('invalid venue id:', invalidVenueId)
   console.log('invalid venue name:', invalidVenueName)
-  console.log('is testing site:', testingVenue)
+  console.log('is testing site:', getState('venueName').includes('cpc-testing-ho') )
   console.log('hide?', hide )
 
 
