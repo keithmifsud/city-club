@@ -122,8 +122,7 @@ function shouldHideStartOrderingButton () {
     getState('venueId') === undefined ||
     getState('venueId') === null
 
-  let invalidVenueName = getState('venueName') === null ||
-    getState('venueName') === 'cpc-testing-ho'
+  let invalidVenueName = getState('venueName') === null
 
   hide =  invalidVenueId && invalidVenueName ||
     getState('venueName').includes('cpc-testing-ho')
@@ -144,6 +143,7 @@ function isFirstVisit () {
 }
 
 async function initialiseState () {
+  Cookies.set('venueName', null)
   return await new Promise((resolve) => {
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.has('guest_id')) {
