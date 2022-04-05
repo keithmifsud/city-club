@@ -124,8 +124,14 @@ function shouldHideStartOrderingButton () {
 
   let invalidVenueName = getState('venueName') === null
 
-  hide =  invalidVenueId && invalidVenueName ||
+  hide =  (invalidVenueId && invalidVenueName) ||
     getState('venueName').includes('cpc-testing-ho')
+
+  console.log('invalid venue id:', invalidVenueId)
+  console.log('invalid venue name:', invalidVenueName)
+  console.log('is tetsing site:', getState('venueName').includes('cpc-testing-ho') )
+  console.log('hide?', hide )
+
 
   return hide
 }
@@ -143,7 +149,6 @@ function isFirstVisit () {
 }
 
 async function initialiseState () {
-  Cookies.set('venueName', null)
   return await new Promise((resolve) => {
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.has('guest_id')) {
