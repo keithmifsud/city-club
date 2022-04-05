@@ -118,11 +118,11 @@ function shouldHideStartOrderingButton () {
 
   let hide = false
 
-  let invalidVenueId = getState('venueId') === undefined ||
-    getState('venueId') === undefined ||
-    getState('venueId') === null
+  let invalidVenueId = Cookies.get('venueId') === undefined ||
+    Cookies.get('venueId') === undefined ||
+    Cookies.get('venueId') === null
 
-  let invalidVenueName = getState('venueName') === null
+  let invalidVenueName = Cookies.get('venueName') === null
 
   let testingVenue = false
 
