@@ -127,7 +127,7 @@ function shouldHideStartOrderingButton () {
   let testingVenue = false
 
   if (Cookies.get('venueName') !== null && Cookies.get('venueName') !== undefined) {
-    testingVenue = getState('venueName').includes('cpc-testing-ho')
+    testingVenue = Cookies.get('venueName').includes('cpc-testing-ho')
   }
 
   hide =  (invalidVenueId && invalidVenueName) || testingVenue
