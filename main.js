@@ -99,7 +99,14 @@ const getAllState = (asString = false) => {
 }
 
 const getState = (propertyName) => {
-  return state[propertyName]
+
+  let stateToReturn = state[propertyName]
+
+  if (stateToReturn === null) {
+    stateToReturn = Cookies.get(propertyName)
+  }
+
+  return stateToReturn
 }
 
 const setState = (propertyName, value, setCookie = true) => {
