@@ -132,12 +132,6 @@ function shouldHideStartOrderingButton () {
 
   hide =  (invalidVenueId && invalidVenueName) || testingVenue
 
-  console.log('invalid venue id:', invalidVenueId)
-  console.log('invalid venue name:', invalidVenueName)
-  console.log('is testing site:', testingVenue )
-  console.log('hide?', hide )
-
-
   return hide
 }
 
