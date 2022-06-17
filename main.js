@@ -307,7 +307,7 @@ let graphApi = graphql(`${API_URL}`, {
 })
 
 async function getMember () {
-  const member = graphApi(`query ($guestId: ID!) {
+/*  const member = graphApi(`query ($guestId: ID!) {
         guestMembership(guestId: $guestId){ ...member }
       }`)
 
@@ -318,6 +318,18 @@ async function getMember () {
       resolve(response.guestMembership)
     }).catch(errors => {
       reject(errors)
+    })
+  })*/
+
+  return await new Promise((resolve, reject) => {
+    axios.get(
+      `https://club.damsonandwilde.co.uk/api/guest?guestId=${Cookies.get('guestId')}`
+    ).then(member => {
+      // ..do something with member but first console log it out to understand the format difference.
+
+      console.log('Retrieved member', member)
+    }).catch(errors => {
+      console.log('God forbids, connection issues:', errors)
     })
   })
 }
