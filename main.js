@@ -4,7 +4,9 @@
 
 /** Configuration **/
 
-const LOGIN_URL = 'https://www.mryum.com/cpc-testing-ho/membership/loyalty'
+const LOGIN_URL = 'https://www.mryum.com/damsonandwilde/membership/loyalty'
+
+/*const LOGIN_URL = 'https://www.mryum.com/cpc-testing-ho/membership/loyalty'*/
 
 const ZAPIER_ON_LOAD_WEB_HOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bsm6fk7/'
 
@@ -16,9 +18,9 @@ const ZAPIER_2000_POINTS_WEBHOOK_URL = 'https://zapier.com/app/history/001a6425-
 
 const ZAPIER_DEDUCT_POINTS_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/1729573/bsnmsqi/'
 
-const API_URL = 'https://eu1-stable-api.mryum.com/graphql'
+const API_URL = 'xxx'
 
-const API_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNTY5YmFhZi0wNzk1LTRjMGUtYWRhMy0wZjVjYzA1YTBmNjYiLCJzdWIiOiIxMDM5ODRjZi0wZmM2LTQwMTMtYWMxMC03MmViMDdkZDM0YjYiLCJpYXQiOjE2NDY4NjMyMzEsImlzcyI6Imh0dHBzOi8vZXUxLXByb2R1Y3Rpb24tc3RhYmxlLWFwaS5tcnl1bS5jb20iLCJhdWQiOiJodHRwczovL2V1MS1wcm9kdWN0aW9uLXN0YWJsZS1hcGkubXJ5dW0uY29tIiwiZXhwIjoxNjc4Mzk5MjMxfQ.MDTXIszIVWhmbPmplmoRQ6Mv8gMBxk34KRt3vKFfZl0'
+const API_TOKEN = 'xxx'
 
 const TIERS = [
   'GUEST',
@@ -131,6 +133,12 @@ function shouldHideStartOrderingButton () {
   }
 
   hide =  (invalidVenueId && invalidVenueName) || testingVenue
+
+  console.log('invalid venue id:', invalidVenueId)
+  console.log('invalid venue name:', invalidVenueName)
+  console.log('is testing site:', testingVenue )
+  console.log('hide?', hide )
+
 
   return hide
 }
@@ -491,28 +499,28 @@ function fillContent () {
 function styleHeader () {
   hideAllTierStars()
   const tier = getState('tier')
-  let headerBackgroundColour = '#bee6b7'
-  let tierColour = '#CDECC8'
+  let headerBackgroundColour = '#A4B39E'
+  let tierColour = '#527162'
   switch (tier) {
     case 'LOCAL':
-      headerBackgroundColour = '#d6f2ea'
-      tierColour = '#AEE5D7'
+      headerBackgroundColour = '#A4B39E'
+      tierColour = '#527162'
       break
     case 'REGULAR':
-      headerBackgroundColour = '#fadad8'
-      tierColour = '#F1A4A0'
+      headerBackgroundColour = '#A4B39E'
+      tierColour = '#527162'
       break
     case 'FRIEND':
-      headerBackgroundColour = '#fbe89d'
-      tierColour = '#F6D13B'
+      headerBackgroundColour = '#A4B39E'
+      tierColour = '#527162'
       break
     case 'FAMILY':
-      headerBackgroundColour = '#cbe2cc'
-      tierColour = '#A5D0AD'
+      headerBackgroundColour = '#A4B39E'
+      tierColour = '#527162'
       break
     default:
-      headerBackgroundColour = '#bee6b7'
-      tierColour = '#CDECC8'
+      headerBackgroundColour = '#A4B39E'
+      tierColour = '#527162'
   }
 
   document.getElementById('header-bg').style.backgroundColor = headerBackgroundColour
